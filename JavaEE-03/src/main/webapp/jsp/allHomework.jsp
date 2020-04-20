@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page import="org.example.javaee.class03.jdbc.shjdbc" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -23,25 +24,20 @@
         <td>作业内容</td>
         <td>提交作业</td>
     </tr>
-    <%
-        List<homework> list = (List<homework>)request.getAttribute("list");
-
-        if(null == list || list.size() <= 0){
-            out.print("None data.");
-        }else {
-            for (homework h : list){
-    %>
     <tr>
-        <td><%=h.getId()%></td>
-        <td><%=h.getTitle()%></td>
-        <td><%=h.getContent()%></td>
-        <td><input type="button"  value="提交作业" onclick="window.location.href='submit?id=<%=h.getId()%>'"  > </td>
+        <c:forEach var="list" items="${list}">
+            <td>
+                <span>${list.id}</span>
+            </td>
+            <td>
+                <span>${list.getTitle()}</span>
+            </td>
+            <td>
+                <span>${lsit.getContent()}</span>
+            </td>
+            <td><input type="button"  value="提交作业" onclick="window.location.href='submit?id=${list.getId()}'"  > </td>
+        </c:forEach>
     </tr>
-    <%
-            }
-        }
-    %>
-
 </table>
 </form>
 </body>

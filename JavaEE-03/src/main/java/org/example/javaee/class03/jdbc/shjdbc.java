@@ -2,6 +2,8 @@ package org.example.javaee.class03.jdbc;
 
 import org.example.javaee.class03.model.homework;
 import org.example.javaee.class03.model.stuhom;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -28,12 +30,13 @@ public class shjdbc {
         String sql = "SELECT * FROM s_h " ;
 
         List<stuhom> list = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(url,user,password)) {
+        try (Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sql)) {
                     //执行结果
                     while (resultSet.next()) {
-                       stuhom sh = new stuhom();
+                        ApplicationContext acx= new ClassPathXmlApplicationContext("bean.xml");
+                        stuhom sh=acx.getBean("stuhom",stuhom.class);
                         sh.setId(resultSet.getLong("id"));
                         sh.setSId(resultSet.getLong("s_id"));
                         sh.setHId(resultSet.getLong("h_id"));
@@ -62,13 +65,14 @@ public class shjdbc {
         String sqlString = "SELECT * FROM homework";
 
         List<homework> list = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(url,user,password)) {
+        try (Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sqlString)) {
                     //执行结果
                     System.out.println("链接成功");
                     while (resultSet.next()) {
-                        homework h = new homework();
+                        ApplicationContext acx= new ClassPathXmlApplicationContext("bean.xml");
+                        homework h=acx.getBean("homework",homework.class);
                         h.setId(resultSet.getLong("id"));
                         h.setTitle(resultSet.getString("title"));
                         h.setContent(resultSet.getString("content"));
@@ -92,7 +96,8 @@ public class shjdbc {
             e.printStackTrace();
         }
         String sql = "SELECT * FROM homework WHERE id =" + id;
-        homework h = new homework();
+        ApplicationContext acx= new ClassPathXmlApplicationContext("bean.xml");
+        homework h=acx.getBean("homework",homework.class);
         try (Connection connection = DriverManager.getConnection(url,user,password)) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sql)) {

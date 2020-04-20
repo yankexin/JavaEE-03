@@ -15,7 +15,9 @@
     <a>欢迎进入学生操作界面</a><br/>
     <a>请选择您的操作</a><br/>
     <ul>
-        <li><a href="${pageContext.request.contextPath}/allHomework">作业提交</a><br/></li>
+        <li><a onclick="function x() {
+          window.location.href ="/allhomework";
+        }">作业提交</a><br/></li>
         <li><a href="../index.jsp">返回</a><br/></li>
     </ul>
     <link>

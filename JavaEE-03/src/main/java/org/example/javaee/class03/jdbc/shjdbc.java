@@ -117,7 +117,7 @@ public class shjdbc {
         return h;
     }
 
-    public static void addHomework(String title,String content) {
+    public static void addHomework(String title, String content) {
        //在作业表中添加作业
         try {
             //加载驱动

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="homework" class="org.example.javaee.class03.model.homework">
+    </bean>
+    <bean id="student" class="org.example.javaee.class03.model.student">
+    </bean>
+    <bean id="stuhom" class="org.example.javaee.class03.model.stuhom">
+    </bean>
+</beans>

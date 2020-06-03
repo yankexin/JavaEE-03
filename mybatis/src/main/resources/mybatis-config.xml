@@ -1,17 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
-<!-- 配置文件的根元素 -->
 <configuration>
-    <!--配置全局属性-->
-    <settings>
-        <!--使用jdbc的getGeneratedKeys获取数据库自增主键值-->
-        <setting name="useGeneratedKeys" value="true"/>
-        <!--使用列标签替换列别名 默认未true-->
-        <setting name="useColumnLabel" value="true" />
-        <!--开启驼峰式命名转换：Table{create_time} -> Entity{createTime}-->
-        <setting name="mapUnderscoreToCamelCase" value="true" />
-    </settings>
+    <!--环境配置，连接的数据库，这里使用的是MySQL-->
+    <environments default="mysql">
+        <environment id="mysql">
+            <!--指定事务管理的类型，这里简单使用Java的JDBC的提交和回滚设置-->
+            <transactionManager type="JDBC"/>
+            <!--dataSource 指连接源配置，POOLED是JDBC连接对象的数据源连接池的实现-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/homework?&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="17301019"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>        <!--这是告诉Mybatis区哪找持久化类的映射文件，对于在src下的文件直接写文件名，            如果在某包下，则要写明路径,如：com/mybatistest/config/User.xml-->
+        <mapper resource="mapper/HomMapper.xml"/>
+        <mapper resource="mapper/SHMapper.xml"/>
+        <mapper resource="mapper/StuMapper.xml"/>
+    </mappers>
 </configuration>

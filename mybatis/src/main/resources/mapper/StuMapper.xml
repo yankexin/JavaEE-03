@@ -3,4 +3,5 @@
 
 <mapper namespace="com.example.mybatis.dao.StuDao">
     <select id="findAll" resultType="com.example.mybatis.entity.student">select * from student</select>
+    <insert id="addStudent" parameterType="student">insert into student(id,name,time) values(#{id},#{name},#{time})</insert>
 </mapper>
